@@ -1,7 +1,52 @@
 import React from "react";
 
 const EditForm = (props) => {
-  return <h1>{props.item.name}</h1>;
+  const [editData, setEditData] = React.useState(props.item);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //code
+    props.history.push("/");
+  };
+
+  const handleChange = (event) => {
+    setEditData({ ...editData, [event.target.name]: event.target.value });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="name"
+        value={editData.name}
+        onChange={handleChange}
+      />
+      <input
+        type="number"
+        name="qty"
+        placeholder="enter quantity"
+        value={editData.qty}
+        onChange={handleChange}
+      />
+      <input
+        type="number"
+        name="price"
+        placeholder="enter price"
+        value={editData.price}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="category"
+        placeholder="enter category"
+        value={editData.category}
+        onChange={handleChange}
+      />
+      <button type="submit" value="Edit">
+        Edit
+      </button>
+    </form>
+  );
 };
 
 export default EditForm;

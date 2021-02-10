@@ -1,5 +1,6 @@
 import "../App.css";
 import React from "react";
+import CreateForm from "./createForm";
 
 const Display = (props) => {
   const {
@@ -42,36 +43,42 @@ const Display = (props) => {
   };
 
   return (
-    <div className="display">
-      <div className="shopping-list">
-        <h2>Pending</h2>
-        <ul>
-          {shoppingItems.sort(sortFtn).map((item) => (
-            <li className="list-item" id={item.name} onClick={toggleClick}>
-              {item.name} -- {item.qty} -- ${item.price}
-              <button
-                onClick={() => {
-                  selectItem(item);
-                  props.history.push("/edit");
-                }}
-              >
-                Edit
-              </button>
-            </li>
-          ))}
-        </ul>
+    <>
+      <CreateForm
+        shoppingItems={shoppingItems}
+        setShoppingItems={setShoppingItems}
+      />
+      <div className="display">
+        <div className="shopping-list">
+          <h2>Pending</h2>
+          <ul>
+            {shoppingItems.sort(sortFtn).map((item) => (
+              <li className="list-item" id={item.name} onClick={toggleClick}>
+                {item.name} -- {item.qty} -- ${item.price}
+                <button
+                  onClick={() => {
+                    selectItem(item);
+                    props.history.push("/edit");
+                  }}
+                >
+                  Edit
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="shopping-list">
+          <h2>Crossed off</h2>
+          <ul>
+            {crossedItems.map((item) => (
+              <li className="list-item" id={item.name} onClick={toggleClick}>
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="shopping-list">
-        <h2>Crossed off</h2>
-        <ul>
-          {crossedItems.map((item) => (
-            <li className="list-item" id={item.name} onClick={toggleClick}>
-              {item.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </>
   );
 };
 

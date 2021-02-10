@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import CreateForm from "./components/createForm";
 import { Route, Link, Switch } from "react-router-dom";
 import EditForm from "./components/editForm";
 import Display from "./components/display";
@@ -18,10 +17,7 @@ function App() {
   return (
     <div className="app">
       <h1>Shopping List</h1>
-      <CreateForm
-        shoppingItems={shoppingItems}
-        setShoppingItems={setShoppingItems}
-      />
+
       <Switch>
         <Route
           exact
