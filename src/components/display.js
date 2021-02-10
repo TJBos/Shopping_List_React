@@ -42,6 +42,18 @@ const Display = (props) => {
     return 0;
   };
 
+  const MakeSubTotal = () => {
+    let subTotal = 0;
+    for (let item of shoppingItems) {
+      if (item.qty && item.price) subTotal += item.qty * item.price;
+    }
+    return (
+      <div>
+        <h4>Subtotal: ${subTotal}</h4>
+      </div>
+    );
+  };
+
   return (
     <>
       <CreateForm
@@ -51,31 +63,32 @@ const Display = (props) => {
       <div className="display">
         <div className="shopping-list">
           <h2>Pending</h2>
-          <ul>
-            {shoppingItems.sort(sortFtn).map((item) => (
-              <li className="list-item" id={item.name} onClick={toggleClick}>
-                {item.name} -- {item.qty} -- ${item.price}
-                <button
-                  onClick={() => {
-                    selectItem(item);
-                    props.history.push("/edit");
-                  }}
-                >
-                  Edit
-                </button>
-              </li>
-            ))}
-          </ul>
+
+          {shoppingItems.sort(sortFtn).map((item) => (
+            <div className="list-item" id={item.name} onClick={toggleClick}>
+              <div>{item.name}</div>
+              <div>Qty: {item.qty}</div>
+              <div>Price: ${item.price}</div>
+              <button
+                onClick={() => {
+                  selectItem(item);
+                  props.history.push("/edit");
+                }}
+              >
+                Edit
+              </button>
+            </div>
+          ))}
+          {MakeSubTotal()}
         </div>
         <div className="shopping-list">
           <h2>Crossed off</h2>
-          <ul>
-            {crossedItems.map((item) => (
-              <li className="list-item" id={item.name} onClick={toggleClick}>
-                {item.name}
-              </li>
-            ))}
-          </ul>
+
+          {crossedItems.map((item) => (
+            <div className="list-item" id={item.name} onClick={toggleClick}>
+              {item.name}
+            </div>
+          ))}
         </div>
       </div>
     </>

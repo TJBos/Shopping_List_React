@@ -5,7 +5,10 @@ const EditForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //code
+    props.setShoppingItems([
+      ...props.shoppingItems.filter((x) => x !== props.item),
+      editData,
+    ]);
     props.history.push("/");
   };
 
