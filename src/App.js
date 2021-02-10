@@ -25,6 +25,18 @@ function App() {
     }
   };
 
+  const sortFtn = (a, b) => {
+    let fa = a.name.toLowerCase(),
+      fb = b.name.toLowerCase();
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  };
+
   return (
     <div className="app">
       <h1>Shopping List</h1>
@@ -36,7 +48,7 @@ function App() {
         <div className="shopping-list">
           <h2>Pending</h2>
           <ul>
-            {shoppingItems.map((item) => (
+            {shoppingItems.sort(sortFtn).map((item) => (
               <li className="list-item" id={item.name} onClick={toggleClick}>
                 {item.name} -- {item.qty} -- ${item.price}
               </li>
