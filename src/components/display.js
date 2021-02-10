@@ -11,6 +11,29 @@ const Display = (props) => {
     setSelectedItem,
   } = props;
 
+  //formData has the dynamic state from the input form
+  const [formData, setFormData] = React.useState({ name: "" });
+  /*
+  const [searchState, setSearchState] = React.useState({
+    search: "",
+  });
+
+  const updateSearch = (event) => {
+    setSearchState({
+      ...searchState,
+      search: formData.name.substr(0, 20),
+    });
+  };
+  */
+
+  let filteredItems = shoppingItems.filter((item) => {
+    return (
+      item.name
+        .toLowerCase()
+        .indexOf(formData.name.substr(0, 20).toLowerCase()) !== -1
+    );
+  });
+
   const selectItem = (item) => {
     setSelectedItem(item);
   };
@@ -59,12 +82,14 @@ const Display = (props) => {
       <CreateForm
         shoppingItems={shoppingItems}
         setShoppingItems={setShoppingItems}
+        formData={formData}
+        setFormData={setFormData}
       />
       <div className="display">
         <div className="shopping-list">
           <h2>Pending</h2>
 
-          {shoppingItems.sort(sortFtn).map((item) => (
+          {filteredItems.sort(sortFtn).map((item) => (
             <div className="list-item" id={item.name} onClick={toggleClick}>
               <div>{item.name}</div>
               <div>Qty: {item.qty}</div>

@@ -2,11 +2,11 @@ import "../App.css";
 import React from "react";
 
 const CreateForm = (props) => {
-  const [formData, setFormData] = React.useState({});
+  const { formData, setFormData, shoppingItems, setShoppingItems } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.setShoppingItems([...props.shoppingItems, formData]);
+    setShoppingItems([...shoppingItems, formData]);
     setFormData({ name: "" });
   };
 
