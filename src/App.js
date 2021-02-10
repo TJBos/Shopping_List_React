@@ -10,22 +10,49 @@ function App() {
     { name: "apples", qty: 2, price: 1, category: "fruit" },
   ]);
 
+  const toggleClick = (event) => {
+    let itemName = event.target.id;
+    let item =
+      shoppingItems.find((x) => x.name === itemName) ||
+      crossedItems.find((x) => x.name === itemName);
+    console.log(item);
+    if (shoppingItems.includes(item)) {
+      setCrossedItems([...crossedItems, item]);
+      setShoppingItems(shoppingItems.filter((x) => x !== item));
+    } else if (crossedItems.includes(item)) {
+      setShoppingItems([...shoppingItems, item]);
+      setCrossedItems(crossedItems.filter((x) => x !== item));
+    }
+  };
+
   return (
-    <div className="App">
+    <div className="app">
       <h1>Shopping List</h1>
       <CreateForm
         shoppingItems={shoppingItems}
         setShoppingItems={setShoppingItems}
       />
-      <div className="pending-items">
-        <h2>Pending</h2>
-        <ul>
-          {shoppingItems.map((item) => (
-            <li>
-              {item.name} -- {item.qty} -- ${item.price}
-            </li>
-          ))}
-        </ul>
+      <div className="display">
+        <div className="shopping-list">
+          <h2>Pending</h2>
+          <ul>
+            {shoppingItems.map((item) => (
+              <li className="list-item" id={item.name} onClick={toggleClick}>
+                {item.name} -- {item.qty} -- ${item.price}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="shopping-list">
+          <h2>Crossed off</h2>
+          <ul>
+            {crossedItems.map((item) => (
+              <li className="list-item" id={item.name} onClick={toggleClick}>
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
