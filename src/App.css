@@ -1,24 +1,4 @@
 .app {
   text-align: center;
-  margin: 0 auto;
-}
-
-.display {
-  display: flex;
-  justify-content: space-around;
-}
-
-.shopping-list {
-  border: 1px solid black;
-  width: 40%;
-  text-align: center;
-}
-
-.list-item {
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 75%;
-  margin: auto;
-  display: flex;
-  justify-content: space-around;
+  margin: 20px auto;
 }

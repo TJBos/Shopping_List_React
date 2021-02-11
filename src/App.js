@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import EditForm from "./components/editForm";
 import Display from "./components/display";
 

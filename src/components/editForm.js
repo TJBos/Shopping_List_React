@@ -1,8 +1,10 @@
 import React from "react";
 
+//EditForm component that can edit name and add quantity, price, category
 const EditForm = (props) => {
   const [editData, setEditData] = React.useState(props.item);
 
+  //function handles form submit
   const handleSubmit = (event) => {
     event.preventDefault();
     props.setShoppingItems([
@@ -12,6 +14,7 @@ const EditForm = (props) => {
     props.history.push("/");
   };
 
+  //binding function that controls state of inputs
   const handleChange = (event) => {
     setEditData({ ...editData, [event.target.name]: event.target.value });
   };

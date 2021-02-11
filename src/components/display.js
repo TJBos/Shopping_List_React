@@ -1,6 +1,30 @@
 import "../App.css";
 import React from "react";
 import CreateForm from "./createForm";
+import styled from "styled-components";
+
+//Styled Components
+
+const Main = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+const ShoppingList = styled.div`
+  border: 1px solid black;
+  width: 40%;
+  text-align: center;
+`;
+
+const ListItem = styled.div`
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+`;
+
+//The functional component
 
 const Display = (props) => {
   const {
@@ -11,21 +35,10 @@ const Display = (props) => {
     setSelectedItem,
   } = props;
 
-  //formData has the dynamic state from the input form
+  //formData has the dynamic state from the text input
   const [formData, setFormData] = React.useState({ name: "" });
-  /*
-  const [searchState, setSearchState] = React.useState({
-    search: "",
-  });
 
-  const updateSearch = (event) => {
-    setSearchState({
-      ...searchState,
-      search: formData.name.substr(0, 20),
-    });
-  };
-  */
-
+  //filter based on substring matching on what's typed in the text input
   let filteredItems = shoppingItems.filter((item) => {
     return (
       item.name
@@ -33,11 +46,12 @@ const Display = (props) => {
         .indexOf(formData.name.substr(0, 20).toLowerCase()) !== -1
     );
   });
-
+  //selector funtion
   const selectItem = (item) => {
     setSelectedItem(item);
   };
 
+  //A toggle function to move items from pending list to crossed off list
   const toggleClick = (event) => {
     let itemName = event.target.id;
     let item =
@@ -53,6 +67,7 @@ const Display = (props) => {
     }
   };
 
+  //A sort comparison function to sort alphabetically based on a key
   const sortFtn = (a, b) => {
     let fa = a.name.toLowerCase(),
       fb = b.name.toLowerCase();
@@ -65,6 +80,7 @@ const Display = (props) => {
     return 0;
   };
 
+  //function to calculate subtotal when prices and quantities are available
   const MakeSubTotal = () => {
     let subTotal = 0;
     for (let item of shoppingItems) {
@@ -85,12 +101,12 @@ const Display = (props) => {
         formData={formData}
         setFormData={setFormData}
       />
-      <div className="display">
-        <div className="shopping-list">
+      <Main>
+        <ShoppingList>
           <h2>Pending</h2>
 
           {filteredItems.sort(sortFtn).map((item) => (
-            <div className="list-item" id={item.name} onClick={toggleClick}>
+            <ListItem id={item.name} onClick={toggleClick}>
               <div>{item.name}</div>
               <div>Qty: {item.qty}</div>
               <div>Price: ${item.price}</div>
@@ -102,20 +118,20 @@ const Display = (props) => {
               >
                 Edit
               </button>
-            </div>
+            </ListItem>
           ))}
           {MakeSubTotal()}
-        </div>
-        <div className="shopping-list">
+        </ShoppingList>
+        <ShoppingList>
           <h2>Crossed off</h2>
 
           {crossedItems.map((item) => (
-            <div className="list-item" id={item.name} onClick={toggleClick}>
+            <ListItem id={item.name} onClick={toggleClick}>
               {item.name}
-            </div>
+            </ListItem>
           ))}
-        </div>
-      </div>
+        </ShoppingList>
+      </Main>
     </>
   );
 };
