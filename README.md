@@ -13,9 +13,12 @@ Display a subtotal (sum of all prices) in the pending list.
 
 # Check out a live link:
 
+https://tjbos.github.io/Shopping_List_React/
+
 # Remarks
 
 - Very minimal styling and layouting was applied, this was strictly intended to highlight functionality
 - By following prompts above literally and in the sequence given, creates an awkward UX e.g. user needs to create item first and can then edit and add quantity, price, etc.
 - Grouping by category was omitted since it was one of the last steps. It is straightforward, but needs quite a bit of refactoring at this point, preferably to change data structure to make items into separate objects where category is the key to make a more iterable.
 - No time was spent to refactor code that might be a bit too lengthy or to split further components out to make code more reusable.
+- There is no use of any databases or backend, everything lives in clients memory
